@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux – Complete Exam Guide (26 Questions)</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2563eb;
+    --accent2: #0f6e56;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --border: #dee2e6;
+    --code-bg: #1e2d3d;
+    --code-fg: #e2e8f0;
+    --muted: #6c757d;
+    --teal: #0f6e56;
+    --amber: #854f0b;
+    --purple: #3c3489;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: #1a1a2e;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2563eb 100%);
+    color: white;
+    padding: 48px 40px 36px;
+    text-align: center;
+  }
+  .cover h1 { font-size: 28px; font-weight: 700; letter-spacing: .5px; }
+  .cover p  { font-size: 14px; opacity: .85; margin-top: 8px; }
+  .badges { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 40px;
+  }
+  .toc h2 { font-size: 13px; font-weight: 700; text-transform: uppercase;
+             letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 4px 16px;
+  }
+  .toc-grid a {
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 12.5px;
+  }
+  .toc-grid a:hover { text-decoration: underline; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qnum {
+    background: rgba(255,255,255,.2);
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 15px; font-weight: 600; }
+  .section-body { padding: 20px; }
+
+  /* ── TYPOGRAPHY ── */
+  h3 { font-size: 14px; font-weight: 700; color: var(--primary); margin: 14px 0 6px; }
+  p  { margin-bottom: 10px; }
+  ul, ol { padding-left: 22px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+  strong { font-weight: 600; color: #1a1a2e; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: #f4f6fb; }
+  tr:hover td { background: #eef2ff; }
+
+  /* ── CODE ── */
+  code {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 12.5px;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 14px 18px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    margin: 10px 0;
+    line-height: 1.7;
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .note, .tip, .def, .warn {
+    border-left: 4px solid;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+  .note  { border-color: var(--accent);  background: #eff6ff; color: #1e40af; }
+  .tip   { border-color: var(--accent2); background: #ecfdf5; color: #065f46; }
+  .def   { border-color: var(--purple);  background: #f5f3ff; color: #3730a3; }
+  .warn  { border-color: #d97706;        background: #fffbeb; color: #92400e; }
+
+  /* ── DIAGRAM ── */
+  .diagram-wrap {
+    text-align: center;
+    background: #f0f4ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 14px 0;
+    overflow-x: auto;
+  }
+  svg text { font-family: 'Segoe UI', Arial, sans-serif; }
+
+  /* ── CMD CARDS ── */
+  .cmd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+  }
+  .cmd-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fafafa;
+  }
+  .cmd-card .cmd-name {
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+  .cmd-card .cmd-desc { font-size: 12.5px; color: #374151; }
+
+  /* ── MODE BADGE ── */
+  .mode {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin: 2px 4px 2px 0;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .section { page-break-inside: avoid; }
+    .cover { background: #1a3a5c !important; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>🐧 Linux – Complete Exam Guide</h1>
+  <p>26 Questions · Diagrams · Concise Exam-Ready Answers</p>
+  <div class="badges">
+    <span class="badge">Architecture</span>
+    <span class="badge">Commands</span>
+    <span class="badge">Shell</span>
+    <span class="badge">Networking</span>
+    <span class="badge">Security</span>
+    <span class="badge">File System</span>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>Quick Navigation</h2>
+  <div class="toc-grid">
+    <a href="#q1">Q1. Linux vs Unix</a>
+    <a href="#q2">Q2. Security of Linux</a>
+    <a href="#q3">Q3. Features of Linux</a>
+    <a href="#q4">Q4. Linux Architecture</a>
+    <a href="#q5">Q5. VI Editor & Modes</a>
+    <a href="#q6">Q6. Linux Commands</a>
+    <a href="#q7">Q7. File Naming Rules</a>
+    <a href="#q8">Q8. Password Rules</a>
+    <a href="#q9">Q9. Environment Variables</a>
+    <a href="#q10">Q10. 5 Utility Commands</a>
+    <a href="#q11">Q11. Multiprogramming/Multitask</a>
+    <a href="#q12">Q12. AWK</a>
+    <a href="#q13">Q13. Shell & Types</a>
+    <a href="#q14">Q14. Shell Responsibilities</a>
+    <a href="#q15">Q15. Protection Modes</a>
+    <a href="#q16">Q16. NFS</a>
+    <a href="#q17">Q17. GRUB Config</a>
+    <a href="#q18">Q18. CIDR</a>
+    <a href="#q19">Q19. umount Options</a>
+    <a href="#q20">Q20. FSTAB File</a>
+    <a href="#q21">Q21. Setup NIC</a>
+    <a href="#q22">Q22. Brief Notes</a>
+    <a href="#q23">Q23. UID & SGID</a>
+    <a href="#q24">Q24. User Files</a>
+    <a href="#q25">Q25. Shell in Linux</a>
+    <a href="#q26">Q26. Shell Comparison</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══ Q1 ══ -->
+<div class="section" id="q1">
+  <div class="section-header">
+    <div class="qnum">1</div>
+    <h2>Difference between Linux and Unix</h2>
+  </div>
+  <div class="section-body">
+    <table>
+      <tr><th>Aspect</th><th>Linux</th><th>Unix</th></tr>
+      <tr><td>Origin</td><td>Developed by Linus Torvalds (1991)</td><td>Developed at AT&amp;T Bell Labs (1969)</td></tr>
+      <tr><td>Cost</td><td>Free &amp; Open Source (GPL)</td><td>Proprietary / Licensed</td></tr>
+      <tr><td>Source Code</td><td>Publicly available</td><td>Restricted / closed</td></tr>
+      <tr><td>Hardware</td><td>Runs on almost all hardware</td><td>Specific hardware only</td></tr>
+      <tr><td>Variants</td><td>Ubuntu, Fedora, Debian, Arch…</td><td>Solaris, HP-UX, AIX, macOS</td></tr>
+      <tr><td>Security</td><td>Community-patched, very secure</td><td>Enterprise-grade vendor patches</td></tr>
+      <tr><td>File System</td><td>ext3, ext4, XFS, Btrfs</td><td>UFS, HFS, JFS</td></tr>
+      <tr><td>Default Shell</td><td>Bash (Bourne Again Shell)</td><td>Bourne Shell (sh)</td></tr>
+      <tr><td>Portability</td><td>Highly portable</td><td>Less portable</td></tr>
+    </table>
+    <div class="tip">Key exam point: Linux is Unix-like but NOT Unix. Linux is a kernel; GNU/Linux is the complete OS.</div>
+  </div>
+</div>
+
+<!-- ══ Q2 ══ -->
+<div class="section" id="q2">
+  <div class="section-header">
+    <div class="qnum">2</div>
+    <h2>Security of Linux</h2>
+  </div>
+  <div class="section-body">
+    <div class="def">Linux is considered one of the most secure operating systems due to its open-source model, permission system, and active community maintenance.</div>
+    <h3>Key Security Features</h3>
+    <ul>
+      <li><strong>User/Group Permissions:</strong> Every file has Owner, Group, Others permissions (rwx). Prevents unauthorized access.</li>
+      <li><strong>Root vs Normal User:</strong> Root has full control; normal users have restricted access, limiting damage from attacks.</li>
+      <li><strong>PAM (Pluggable Authentication Modules):</strong> Flexible authentication framework for applications.</li>
+      <li><strong>SELinux / AppArmor:</strong> Mandatory Access Control (MAC) policies that restrict processes beyond normal permissions.</li>
+      <li><strong>Firewall (iptables / nftables):</strong> Packet filtering at kernel level. Controls inbound/outbound traffic.</li>
+      <li><strong>SSH (Secure Shell):</strong> Encrypted remote login. Replaces insecure Telnet/FTP.</li>
+      <li><strong>File Encryption:</strong> LUKS for disk encryption, GPG for files.</li>
+      <li><strong>Audit Logging:</strong> <code>/var/log/</code> captures all system events. Tools: <code>auditd</code>, <code>journalctl</code>.</li>
+      <li><strong>Open Source Advantage:</strong> Code is reviewed by millions — vulnerabilities are found and patched faster.</li>
+      <li><strong>Minimal Attack Surface:</strong> Only required services run; fewer background processes = fewer vulnerabilities.</li>
+    </ul>
+    <div class="note">Command to check failed logins: <code>cat /var/log/auth.log | grep "Failed"</code></div>
+  </div>
+</div>
+
+<!-- ══ Q3 ══ -->
+<div class="section" id="q3">
+  <div class="section-header">
+    <div class="qnum">3</div>
+    <h2>Features of Linux</h2>
+  </div>
+  <div class="section-body">
+    <div class="cmd-grid">
+      <div class="cmd-card"><div class="cmd-name">Open Source</div><div class="cmd-desc">Source code freely available, modifiable, redistributable under GPL.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Multiuser</div><div class="cmd-desc">Multiple users can work simultaneously on same system.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Multitasking</div><div class="cmd-desc">Multiple processes run concurrently using CPU scheduling.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Portability</div><div class="cmd-desc">Runs on x86, ARM, MIPS, RISC-V, embedded devices, mainframes.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Security</div><div class="cmd-desc">File permissions, SELinux, firewall, encrypted filesystem.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Hierarchical FS</div><div class="cmd-desc">Single root <code>/</code> tree; everything is a file.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Network Support</div><div class="cmd-desc">Built-in TCP/IP, NFS, FTP, DNS, DHCP support.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Shell Scripting</div><div class="cmd-desc">Powerful Bash scripting automates tasks.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Stability</div><div class="cmd-desc">Linux servers run for years without reboot.</div></div>
+      <div class="cmd-card"><div class="cmd-name">Free of Cost</div><div class="cmd-desc">No licensing fee. Distributions are free to download.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Q4 ══ -->
+<div class="section" id="q4">
+  <div class="section-header">
+    <div class="qnum">4</div>
+    <h2>Linux Architecture</h2>
+  </div>
+  <div class="section-body">
+    <div class="diagram-wrap">
+      <svg width="680" height="360" viewBox="0 0 680 360" role="img">
+        <title>Linux Architecture Layers</title>
+        <desc>Five-layer diagram showing User, Shell, System Calls, Kernel, and Hardware layers of Linux.</desc>
+        <!-- Layer 5: User Applications -->
+        <rect x="60" y="20" width="560" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="340" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af">User Space / Applications</text>
+        <text x="340" y="58" text-anchor="middle" font-size="12" fill="#1d4ed8">Editors, Browsers, Shell scripts, Compilers, Desktop GUI</text>
+        <!-- Layer 4: Shell -->
+        <rect x="60" y="82" width="560" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="340" y="102" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Shell (Command Interpreter)</text>
+        <text x="340" y="120" text-anchor="middle" font-size="12" fill="#166534">Bash, Ksh, Zsh, Sh — translates commands → system calls</text>
+        <!-- Layer 3: System Call Interface -->
+        <rect x="60" y="144" width="560" height="50" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+        <text x="340" y="164" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">System Call Interface</text>
+        <text x="340" y="182" text-anchor="middle" font-size="12" fill="#92400e">open(), read(), write(), fork(), exec(), exit() …</text>
+        <!-- Layer 2: Kernel -->
+        <rect x="60" y="206" width="560" height="80" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="340" y="230" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">Kernel (Core of Linux)</text>
+        <!-- Sub-boxes inside kernel -->
+        <rect x="80"  y="240" width="105" height="36" rx="5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1"/>
+        <text x="132" y="263" text-anchor="middle" font-size="11" font-weight="600" fill="#3730a3">Process Mgmt</text>
+        <rect x="195" y="240" width="105" height="36" rx="5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1"/>
+        <text x="247" y="263" text-anchor="middle" font-size="11" font-weight="600" fill="#3730a3">Memory Mgmt</text>
+        <rect x="310" y="240" width="105" height="36" rx="5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1"/>
+        <text x="362" y="263" text-anchor="middle" font-size="11" font-weight="600" fill="#3730a3">File System</text>
+        <rect x="425" y="240" width="100" height="36" rx="5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1"/>
+        <text x="475" y="263" text-anchor="middle" font-size="11" font-weight="600" fill="#3730a3">Device Drivers</text>
+        <rect x="535" y="240" width="70" height="36" rx="5" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1"/>
+        <text x="570" y="263" text-anchor="middle" font-size="11" font-weight="600" fill="#3730a3">Networking</text>
+        <!-- Layer 1: Hardware -->
+        <rect x="60" y="298" width="560" height="48" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+        <text x="340" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#831843">Hardware Layer</text>
+        <text x="340" y="335" text-anchor="middle" font-size="12" fill="#9d174d">CPU · RAM · Disk · NIC · GPU · I/O Devices</text>
+        <!-- Arrows -->
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+        <line x1="340" y1="70" x2="340" y2="80" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="340" y1="132" x2="340" y2="142" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="340" y1="194" x2="340" y2="204" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="340" y1="286" x2="340" y2="296" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+    <h3>Layer Descriptions</h3>
+    <ul>
+      <li><strong>Hardware:</strong> Physical components — CPU, RAM, storage, network cards.</li>
+      <li><strong>Kernel:</strong> Core of Linux. Manages hardware, processes, memory, file systems, and device drivers directly.</li>
+      <li><strong>System Call Interface:</strong> Bridge between user programs and kernel. Programs request kernel services via system calls.</li>
+      <li><strong>Shell:</strong> Command-line interpreter. Takes user commands, translates them, and passes them to the kernel via system calls.</li>
+      <li><strong>User Applications:</strong> Programs users run — text editors, browsers, compilers, scripts.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ Q5 ══ -->
+<div class="section" id="q5">
+  <div class="section-header">
+    <div class="qnum">5</div>
+    <h2>VI Editor and Its Modes</h2>
+  </div>
+  <div class="section-body">
+    <div class="def">VI (Visual Editor) is the default text editor in Linux/Unix. It is a terminal-based editor that works without a GUI.</div>
+    <div class="diagram-wrap">
+      <svg width="680" height="220" viewBox="0 0 680 220" role="img">
+        <title>VI Editor Modes</title>
+        <desc>Three VI editor modes: Command mode, Insert mode, and Last-Line mode, with transitions between them.</desc>
+        <defs><marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+        <!-- Command mode (center) -->
+        <rect x="260" y="80" width="160" height="60" rx="10" fill="#1e3a5f" stroke="#2563eb" stroke-width="2"/>
+        <text x="340" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="white">Command Mode</text>
+        <text x="340" y="126" text-anchor="middle" font-size="11" fill="#93c5fd">(Default on open)</text>
+        <!-- Insert mode (left) -->
+        <rect x="60" y="80" width="150" height="60" rx="10" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+        <text x="135" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="white">Insert Mode</text>
+        <text x="135" y="126" text-anchor="middle" font-size="11" fill="#6ee7b7">Type text here</text>
+        <!-- Last-line mode (right) -->
+        <rect x="470" y="80" width="150" height="60" rx="10" fill="#4c1d95" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="545" y="107" text-anchor="middle" font-size="14" font-weight="700" fill="white">Last-Line Mode</text>
+        <text x="545" y="126" text-anchor="middle" font-size="11" fill="#c4b5fd">Save / Quit / Search</text>
+        <!-- Arrows -->
+        <line x1="259" y1="100" x2="212" y2="100" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="235" y="92" text-anchor="middle" font-size="11" fill="#059669">i / a / o</text>
+        <line x1="210" y1="120" x2="258" y2="120" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="234" y="136" text-anchor="middle" font-size="11" fill="#ef4444">Esc</text>
+        <line x1="421" y1="100" x2="468" y2="100" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="444" y="92" text-anchor="middle" font-size="11" fill="#7c3aed">: (colon)</text>
+        <line x1="469" y1="120" x2="422" y2="120" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="445" y="136" text-anchor="middle" font-size="11" fill="#ef4444">Esc</text>
+        <!-- Keys -->
+        <rect x="60"  y="170" width="560" height="36" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+        <text x="340" y="186" text-anchor="middle" font-size="12" fill="#374151" font-weight="600">Common Last-line Commands:</text>
+        <text x="340" y="200" text-anchor="middle" font-size="11" fill="#4b5563">:w – save   :q – quit   :wq – save &amp; quit   :q! – force quit   /text – search</text>
+      </svg>
+    </div>
+    <h3>Mode Details</h3>
+    <table>
+      <tr><th>Mode</th><th>How to Enter</th><th>Purpose</th></tr>
+      <tr><td>Command Mode</td><td>Default / press <code>Esc</code></td><td>Navigate, delete, copy, paste. Keystrokes are commands, not text.</td></tr>
+      <tr><td>Insert Mode</td><td><code>i</code> (before cursor), <code>a</code> (after), <code>o</code> (new line)</td><td>Type and edit text.</td></tr>
+      <tr><td>Last-Line Mode</td><td><code>:</code> from Command mode</td><td>Save, quit, search, replace, set options.</td></tr>
+    </table>
+    <div class="tip">Open a file: <code>vi filename.txt</code>  |  To open read-only: <code>vi -R filename.txt</code></div>
+  </div>
+</div>
+
+<!-- ══ Q6 ══ -->
+<div class="section" id="q6">
+  <div class="section-header">
+    <div class="qnum">6</div>
+    <h2>Linux Commands – cat, chmod, grep, alias, man, help, telnet, route, hostname, ping, ifconfig, sort, find, mount, gawk, FTP, nslookup, whois, DNS</h2>
+  </div>
+  <div class="section-body">
+    <div class="cmd-grid">
+      <div class="cmd-card">
+        <div class="cmd-name">cat</div>
+        <div class="cmd-desc">Concatenate and display file contents.<br><code>cat file.txt</code><br><code>cat file1 file2 &gt; merged.txt</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">chmod</div>
+        <div class="cmd-desc">Change file permissions (read/write/execute).<br><code>chmod 755 script.sh</code><br><code>chmod u+x file</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">grep</div>
+        <div class="cmd-desc">Search text using patterns (regex).<br><code>grep "error" log.txt</code><br><code>grep -r "word" /dir/</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">alias</div>
+        <div class="cmd-desc">Create shortcut for a command.<br><code>alias ll='ls -la'</code><br><code>unalias ll</code> removes it.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">man</div>
+        <div class="cmd-desc">Display manual/help page for any command.<br><code>man ls</code> &nbsp; <code>man grep</code><br>Press <code>q</code> to quit.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">help</div>
+        <div class="cmd-desc">Get help for built-in shell commands.<br><code>help cd</code><br><code>command --help</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">telnet</div>
+        <div class="cmd-desc">Remote login (insecure, unencrypted). Replaced by SSH.<br><code>telnet 192.168.1.1 23</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">route</div>
+        <div class="cmd-desc">Display/modify routing table.<br><code>route -n</code><br><code>route add default gw 192.168.1.1</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">hostname</div>
+        <div class="cmd-desc">Show or set system's hostname.<br><code>hostname</code><br><code>hostname myserver</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">ping</div>
+        <div class="cmd-desc">Test network connectivity using ICMP packets.<br><code>ping google.com</code><br><code>ping -c 4 8.8.8.8</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">ifconfig</div>
+        <div class="cmd-desc">Configure/view network interfaces.<br><code>ifconfig eth0</code><br><code>ifconfig eth0 up/down</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">sort</div>
+        <div class="cmd-desc">Sort lines of text files.<br><code>sort file.txt</code><br><code>sort -r file.txt</code> (reverse)</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">find</div>
+        <div class="cmd-desc">Search files/directories.<br><code>find / -name "*.txt"</code><br><code>find . -type f -size +1M</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">mount</div>
+        <div class="cmd-desc">Attach a filesystem to directory tree.<br><code>mount /dev/sdb1 /mnt/usb</code><br><code>mount -t ext4 /dev/sda1 /mnt</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">gawk</div>
+        <div class="cmd-desc">GNU version of AWK — pattern scanning &amp; processing.<br><code>gawk '{print $1}' file.txt</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">FTP</div>
+        <div class="cmd-desc">File Transfer Protocol — transfer files between hosts.<br><code>ftp 192.168.1.10</code><br>get/put to download/upload.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">nslookup</div>
+        <div class="cmd-desc">Query DNS to find IP for domain.<br><code>nslookup google.com</code><br><code>nslookup 8.8.8.8</code></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">whois</div>
+        <div class="cmd-desc">Look up domain registration info.<br><code>whois google.com</code><br>Returns registrar, expiry, owner.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-name">DNS</div>
+        <div class="cmd-desc">Domain Name System — resolves domain names to IPs. Config: <code>/etc/resolv.conf</code><br>Tool: <code>dig google.com</code></div>
+      </div>
+    </div>
+
+    <h3>chmod Permission Table</h3>
+    <table>
+      <tr><th>Number</th><th>Permission</th><th>Symbol</th></tr>
+      <tr><td>7</td><td>Read + Write + Execute</td><td>rwx</td></tr>
+      <tr><td>6</td><td>Read + Write</td><td>rw-</td></tr>
+      <tr><td>5</td><td>Read + Execute</td><td>r-x</td></tr>
+      <tr><td>4</td><td>Read only</td><td>r--</td></tr>
+      <tr><td>0</td><td>No permission</td><td>---</td></tr>
+    </table>
+    <div class="note"><code>chmod 755 file</code> = Owner: rwx | Group: r-x | Others: r-x</div>
+  </div>
+</div>
+
+<!-- ══ Q7 ══ -->
+<div class="section" id="q7">
+  <div class="section-header">
+    <div class="qnum">7</div>
+    <h2>Rules of Writing File Names in Linux</h2>
+  </div>
+  <div class="section-body">
+    <ul>
+      <li>File names are <strong>case-sensitive</strong>: <code>File.txt</code> ≠ <code>file.txt</code></li>
+      <li>Maximum length: <strong>255 characters</strong> per file name; 4096 for full path.</li>
+      <li>Can contain letters, digits, underscore <code>_</code>, hyphen <code>-</code>, dot <code>.</code></li>
+      <li><strong>Avoid special characters:</strong> <code>/ \ * ? &lt; &gt; | ; &amp; $ ! # @ [ ] ( ) { }</code></li>
+      <li>Avoid <strong>spaces</strong> in file names (use <code>_</code> or <code>-</code> instead); if needed, use quotes: <code>"my file.txt"</code></li>
+      <li>File names starting with <code>.</code> (dot) are <strong>hidden files</strong>: <code>.bashrc</code>, <code>.ssh</code></li>
+      <li><strong>No reserved names</strong> like <code>/</code> (root) or <code>.</code> and <code>..</code> (current &amp; parent dir)</li>
+      <li>Extensions are optional — Linux does not rely on file extensions to determine file type</li>
+      <li>Avoid starting with <code>-</code> (hyphen) — can be misinterpreted as command options</li>
+    </ul>
+    <div class="tip">Good names: <code>report_2024.txt</code>, <code>my-script.sh</code> &nbsp;|&nbsp; Bad names: <code>my file!.txt</code>, <code>-report</code></div>
+  </div>
+</div>
+
+<!-- ══ Q8 ══ -->
+<div class="section" id="q8">
+  <div class="section-header">
+    <div class="qnum">8</div>
+    <h2>Rules for Having a Password in Linux</h2>
+  </div>
+  <div class="section-body">
+    <ul>
+      <li>Minimum <strong>8 characters</strong> (PAM default; configurable)</li>
+      <li>Should include: <strong>uppercase, lowercase, digits, special characters</strong></li>
+      <li>Must NOT be a <strong>dictionary word</strong> or the username</li>
+      <li>Must NOT be a <strong>previously used password</strong> (password history via PAM)</li>
+      <li>Password <strong>expiry</strong> can be set using <code>chage -M 90 username</code> (expires in 90 days)</li>
+      <li>Stored as <strong>hashed values</strong> in <code>/etc/shadow</code> (never in plain text)</li>
+      <li>Root can change any user's password: <code>passwd username</code></li>
+      <li>Users change own password: <code>passwd</code> (no argument)</li>
+      <li>Account lockout after N failed attempts (configured in PAM: <code>pam_faillock</code>)</li>
+    </ul>
+    <h3>Password Fields in /etc/shadow</h3>
+    <pre>username:$6$hash...:18900:0:99999:7:::</pre>
+    <p>Fields: username : hashed-password : last-change : min-age : max-age : warn-days : inactive : expire</p>
+    <div class="note">Hash types: <code>$1</code>=MD5, <code>$5</code>=SHA-256, <code>$6</code>=SHA-512 (most secure)</div>
+  </div>
+</div>
+
+<!-- ══ Q9 ══ -->
+<div class="section" id="q9">
+  <div class="section-header">
+    <div class="qnum">9</div>
+    <h2>Local and Global Environment Variables and Their Difference</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>Environment Variable:</strong> A named value stored in memory that affects the behaviour of processes and programs.</div>
+    <h3>Local (Shell) Variables</h3>
+    <ul>
+      <li>Exist only in the <strong>current shell session</strong></li>
+      <li>Not inherited by child processes</li>
+      <li>Created with: <code>VAR=value</code></li>
+      <li>Viewed with: <code>set</code></li>
+    </ul>
+    <pre>MY_NAME="Ravi"
+echo $MY_NAME   # Works in current shell
+bash             # New child shell — MY_NAME not available here</pre>
+    <h3>Global (Environment) Variables</h3>
+    <ul>
+      <li>Available to <strong>current shell and all child processes</strong></li>
+      <li>Exported using <code>export</code> command</li>
+      <li>Viewed with: <code>env</code> or <code>printenv</code></li>
+    </ul>
+    <pre>export PATH="$PATH:/usr/local/bin"
+export HOME=/home/ravi</pre>
+    <table>
+      <tr><th>Feature</th><th>Local Variable</th><th>Global/Environment Variable</th></tr>
+      <tr><td>Scope</td><td>Current shell only</td><td>Current shell + all child processes</td></tr>
+      <tr><td>Export needed?</td><td>No</td><td>Yes (export VAR)</td></tr>
+      <tr><td>View command</td><td>set</td><td>env / printenv</td></tr>
+      <tr><td>Persistence</td><td>Lost on shell exit</td><td>Lost on shell exit (add to .bashrc to persist)</td></tr>
+      <tr><td>Example</td><td>x=10</td><td>export JAVA_HOME=/usr/java</td></tr>
+    </table>
+    <div class="tip">Common global vars: <code>PATH</code>, <code>HOME</code>, <code>USER</code>, <code>SHELL</code>, <code>LANG</code>, <code>PS1</code></div>
+  </div>
+</div>
+
+<!-- ══ Q10 ══ -->
+<div class="section" id="q10">
+  <div class="section-header">
+    <div class="qnum">10</div>
+    <h2>Main 5 Utility Commands of Linux (In Detail)</h2>
+  </div>
+  <div class="section-body">
+    <h3>1. ls – List Directory Contents</h3>
+    <pre>ls -l    # Long listing (permissions, size, date)
+ls -a    # Show hidden files
+ls -lh   # Human-readable sizes
+ls -R    # Recursive listing</pre>
+    <h3>2. ps – Process Status</h3>
+    <pre>ps aux         # All processes with details
+ps -ef         # Full-format listing
+ps aux | grep apache   # Find specific process</pre>
+    <p>Shows: PID, CPU%, MEM%, Command for each running process.</p>
+    <h3>3. grep – Global Regular Expression Print</h3>
+    <pre>grep "error" /var/log/syslog     # Search in file
+grep -i "error" file.txt          # Case-insensitive
+grep -n "word" file.txt           # Show line numbers
+grep -v "exclude" file.txt        # Invert match</pre>
+    <h3>4. tar – Archive Utility</h3>
+    <pre>tar -cvf archive.tar /home/user/  # Create archive
+tar -xvf archive.tar              # Extract archive
+tar -czvf archive.tar.gz /dir/    # Create + compress (gzip)
+tar -xzvf archive.tar.gz          # Extract compressed</pre>
+    <h3>5. chmod – Change File Permissions</h3>
+    <pre>chmod 755 file      # rwxr-xr-x
+chmod 644 file      # rw-r--r--
+chmod +x script.sh  # Add execute for all
+chmod -R 755 /dir/  # Recursive</pre>
+  </div>
+</div>
+
+<!-- ══ Q11 ══ -->
+<div class="section" id="q11">
+  <div class="section-header">
+    <div class="qnum">11</div>
+    <h2>Multiprogramming, Multitasking, and Multiuser in Linux</h2>
+  </div>
+  <div class="section-body">
+    <table>
+      <tr><th>Term</th><th>Definition</th><th>Linux Example</th></tr>
+      <tr>
+        <td><strong>Multiprogramming</strong></td>
+        <td>Multiple programs are loaded in memory at the same time. CPU switches between them when one is waiting for I/O. Goal: maximize CPU utilization.</td>
+        <td>Linux keeps many processes in memory (browser, text editor, daemon) — CPU picks whichever is ready to run.</td>
+      </tr>
+      <tr>
+        <td><strong>Multitasking</strong></td>
+        <td>CPU rapidly switches between tasks giving illusion of simultaneous execution. Each task gets a time slice (time-sharing / preemptive scheduling).</td>
+        <td>You can compile code, play music, and browse simultaneously on Linux. Kernel scheduler allocates CPU slices.</td>
+      </tr>
+      <tr>
+        <td><strong>Multiuser</strong></td>
+        <td>Multiple users can log in and use the system simultaneously. Each user has separate processes, files, and permissions.</td>
+        <td>A Linux server can have 100s of users logged in via SSH, each running their own programs independently.</td>
+      </tr>
+    </table>
+    <div class="note">Linux uses the <strong>Completely Fair Scheduler (CFS)</strong> for multitasking. Commands: <code>top</code>, <code>htop</code>, <code>who</code>, <code>w</code></div>
+  </div>
+</div>
+
+<!-- ══ Q12 ══ -->
+<div class="section" id="q12">
+  <div class="section-header">
+    <div class="qnum">12</div>
+    <h2>What is AWK? List Any 2 Features</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>AWK</strong> is a powerful text-processing language/utility in Linux used for pattern scanning, data extraction, and reporting. Created by <strong>A</strong>ho, <strong>W</strong>einberger, and <strong>K</strong>ernighan.</div>
+    <h3>Syntax</h3>
+    <pre>awk 'pattern { action }' filename</pre>
+    <h3>Example</h3>
+    <pre>awk '{print $1, $3}' file.txt       # Print 1st and 3rd column
+awk -F: '{print $1}' /etc/passwd    # Print usernames (: separator)
+awk '/error/ {print}' log.txt       # Print lines with "error"
+awk '{sum += $2} END {print sum}' data.txt   # Sum column 2</pre>
+    <h3>2 Key Features</h3>
+    <ol>
+      <li><strong>Field and Record Processing:</strong> AWK automatically splits each line into fields (<code>$1</code>, <code>$2</code>…) using a delimiter. This makes processing structured data (like CSV, logs, /etc/passwd) very easy without manual parsing.</li>
+      <li><strong>Built-in Variables:</strong> AWK provides powerful built-in variables: <code>NR</code> (current record/line number), <code>NF</code> (number of fields), <code>FS</code> (field separator), <code>OFS</code> (output field separator), <code>BEGIN/END</code> blocks for initialization and finalization.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ Q13 ══ -->
+<div class="section" id="q13">
+  <div class="section-header">
+    <div class="qnum">13</div>
+    <h2>What is Shell and Its Types</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>Shell</strong> is a command-line interface (CLI) that acts as an intermediary between the user and the Linux kernel. It reads user commands, interprets them, and passes them to the OS for execution.</div>
+    <h3>Types of Shell</h3>
+    <table>
+      <tr><th>Shell</th><th>Full Name</th><th>Command</th><th>Key Feature</th></tr>
+      <tr><td><strong>sh</strong></td><td>Bourne Shell</td><td>/bin/sh</td><td>Original Unix shell, basic scripting</td></tr>
+      <tr><td><strong>bash</strong></td><td>Bourne Again Shell</td><td>/bin/bash</td><td>Default in most Linux; powerful scripting, history</td></tr>
+      <tr><td><strong>ksh</strong></td><td>Korn Shell</td><td>/bin/ksh</td><td>Combines sh + csh features; popular in enterprise</td></tr>
+      <tr><td><strong>csh</strong></td><td>C Shell</td><td>/bin/csh</td><td>C-like syntax, aliases, job control</td></tr>
+      <tr><td><strong>tcsh</strong></td><td>TENEX C Shell</td><td>/bin/tcsh</td><td>Enhanced csh with tab completion, command editing</td></tr>
+      <tr><td><strong>zsh</strong></td><td>Z Shell</td><td>/bin/zsh</td><td>Default on macOS; powerful completion, plugins (Oh-My-Zsh)</td></tr>
+      <tr><td><strong>fish</strong></td><td>Friendly Interactive Shell</td><td>/usr/bin/fish</td><td>User-friendly, syntax highlighting, auto-suggestions</td></tr>
+    </table>
+    <div class="note">Check current shell: <code>echo $SHELL</code>  |  List available shells: <code>cat /etc/shells</code></div>
+  </div>
+</div>
+
+<!-- ══ Q14 ══ -->
+<div class="section" id="q14">
+  <div class="section-header">
+    <div class="qnum">14</div>
+    <h2>Responsibilities of the Shell</h2>
+  </div>
+  <div class="section-body">
+    <ol>
+      <li><strong>Command Interpretation:</strong> Reads and parses commands typed by the user; determines if it's a built-in command or an external program.</li>
+      <li><strong>Program Execution:</strong> Forks a child process and uses <code>exec()</code> system call to run the requested program.</li>
+      <li><strong>I/O Redirection:</strong> Handles <code>&gt;</code> (output), <code>&lt;</code> (input), <code>&gt;&gt;</code> (append) to redirect streams.</li>
+      <li><strong>Pipe Management:</strong> Connects output of one command to input of another using <code>|</code>. e.g., <code>ls | grep .txt</code></li>
+      <li><strong>Variable Management:</strong> Stores and retrieves shell variables and environment variables.</li>
+      <li><strong>Wildcard Expansion:</strong> Expands wildcards like <code>*</code>, <code>?</code>, <code>[]</code> before passing to commands (globbing).</li>
+      <li><strong>Shell Scripting:</strong> Executes scripts containing loops, conditions, functions — automation of tasks.</li>
+      <li><strong>Job Control:</strong> Manages foreground/background processes. <code>Ctrl+Z</code> suspends, <code>bg</code>/<code>fg</code> switches, <code>&amp;</code> backgrounds.</li>
+      <li><strong>Signal Handling:</strong> Intercepts and handles signals like <code>SIGINT</code> (Ctrl+C), <code>SIGTERM</code>.</li>
+      <li><strong>Command History:</strong> Maintains command history (<code>~/.bash_history</code>) for recall and reuse.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══ Q15 ══ -->
+<div class="section" id="q15">
+  <div class="section-header">
+    <div class="qnum">15</div>
+    <h2>Protection Modes of Linux OS</h2>
+  </div>
+  <div class="section-body">
+    <h3>1. Dual Mode Operation</h3>
+    <div class="diagram-wrap">
+      <svg width="680" height="150" viewBox="0 0 680 150" role="img">
+        <title>Dual mode operation</title>
+        <desc>Two modes: User mode and Kernel mode, with system calls and interrupts switching between them.</desc>
+        <defs><marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+        <rect x="60" y="30" width="230" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="175" y="65" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af">User Mode</text>
+        <text x="175" y="85" text-anchor="middle" font-size="11" fill="#1d4ed8">Applications run here</text>
+        <text x="175" y="100" text-anchor="middle" font-size="11" fill="#1d4ed8">Mode bit = 1</text>
+        <rect x="390" y="30" width="230" height="80" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="505" y="65" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Kernel Mode</text>
+        <text x="505" y="85" text-anchor="middle" font-size="11" fill="#166534">OS/Hardware access</text>
+        <text x="505" y="100" text-anchor="middle" font-size="11" fill="#166534">Mode bit = 0</text>
+        <line x1="292" y1="58" x2="388" y2="58" stroke="#374151" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="340" y="50" text-anchor="middle" font-size="11" fill="#374151">System Call</text>
+        <line x1="388" y1="90" x2="292" y2="90" stroke="#374151" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="340" y="108" text-anchor="middle" font-size="11" fill="#374151">Return from call</text>
+      </svg>
+    </div>
+    <p>The CPU operates in two modes. <strong>User mode</strong> (limited privileges) for user applications; <strong>Kernel mode</strong> (full privilege) for OS operations. This prevents user programs from directly accessing hardware or critical memory.</p>
+
+    <h3>2. I/O Protection</h3>
+    <p>All I/O instructions are <strong>privileged instructions</strong> — only the OS (kernel mode) can execute them. If a user program attempts direct I/O, it causes a trap (exception), and the OS terminates or handles it. User programs must request I/O via <strong>system calls</strong>.</p>
+
+    <h3>3. Memory Protection</h3>
+    <p>Linux uses <strong>base and limit registers</strong> plus <strong>virtual memory</strong> (paging/segmentation) to ensure each process can only access its own memory space. Any attempt to access another process's memory causes a <strong>segmentation fault</strong>. Hardware enforces this via the MMU (Memory Management Unit).</p>
+
+    <h3>4. Hardware Protection</h3>
+    <p>Direct hardware access is restricted to the kernel. Peripherals (disk, NIC, GPU) are managed by <strong>device drivers</strong> running in kernel space. User programs communicate with hardware only through well-defined system calls, preventing hardware damage or unauthorized access.</p>
+
+    <h3>5. CPU Protection</h3>
+    <p>A <strong>timer</strong> (hardware clock) is set by the OS before giving CPU to a user process. When the timer expires, a hardware interrupt fires, the OS regains control, and switches to another process. This prevents any single process from monopolizing the CPU (infinite loops can't hang the system).</p>
+  </div>
+</div>
+
+<!-- ══ Q16 ══ -->
+<div class="section" id="q16">
+  <div class="section-header">
+    <div class="qnum">16</div>
+    <h2>NFS – Network File System</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>NFS (Network File System)</strong> is a distributed file system protocol developed by Sun Microsystems that allows a computer to access files over a network as if they were on its local disk.</div>
+    <h3>How It Works</h3>
+    <p>An NFS <strong>server exports</strong> a directory. NFS <strong>clients mount</strong> that directory locally. The client can then read/write files transparently over the network using RPC (Remote Procedure Calls).</p>
+    <pre># On Server – export /shared
+echo "/shared  192.168.1.0/24(rw,sync)" >> /etc/exports
+exportfs -ra
+
+# On Client – mount server's share
+mount server_ip:/shared /mnt/nfs</pre>
+    <table>
+      <tr><th>Advantages</th><th>Disadvantages</th></tr>
+      <tr><td>Centralized file storage — easier backup</td><td>Network failure = loss of access to files</td></tr>
+      <tr><td>Multiple clients share same data</td><td>Performance depends on network speed</td></tr>
+      <tr><td>Transparent access (feels local)</td><td>Security concerns (older versions send data unencrypted)</td></tr>
+      <tr><td>No data duplication across clients</td><td>Complex to configure correctly</td></tr>
+      <tr><td>OS-independent (works across Linux, macOS)</td><td>Latency issues for large file operations</td></tr>
+    </table>
+    <div class="note">Config files: <code>/etc/exports</code> (server) | <code>/etc/fstab</code> (client auto-mount)</div>
+  </div>
+</div>
+
+<!-- ══ Q17 ══ -->
+<div class="section" id="q17">
+  <div class="section-header">
+    <div class="qnum">17</div>
+    <h2>GRUB Configuration File</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>GRUB (Grand Unified Bootloader)</strong> is the default bootloader in Linux. It presents the boot menu and loads the selected OS kernel into memory.</div>
+    <h3>Key Config File: /boot/grub/grub.cfg</h3>
+    <p>This file is <strong>auto-generated</strong> — do not edit directly. Edit <code>/etc/default/grub</code> then run <code>update-grub</code>.</p>
+    <h3>/etc/default/grub – Important Parameters</h3>
+    <pre># /etc/default/grub
+GRUB_DEFAULT=0              # Default menu entry (0 = first)
+GRUB_TIMEOUT=5              # Seconds to show menu before boot
+GRUB_DISTRIBUTOR="Ubuntu"   # OS name in boot menu
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"  # Kernel boot params
+GRUB_CMDLINE_LINUX=""       # Extra kernel parameters
+GRUB_DISABLE_RECOVERY=true  # Hide recovery mode entries
+GRUB_GFXMODE=1024x768       # Screen resolution for menu</pre>
+    <h3>Apply Changes</h3>
+    <pre>sudo update-grub        # Regenerate /boot/grub/grub.cfg
+sudo grub-install /dev/sda  # Reinstall GRUB to disk MBR</pre>
+    <h3>GRUB Boot Process</h3>
+    <p><strong>BIOS/UEFI → GRUB Stage 1 (MBR) → GRUB Stage 2 → /boot/grub/grub.cfg → Kernel loaded → initramfs → init/systemd</strong></p>
+  </div>
+</div>
+
+<!-- ══ Q18 ══ -->
+<div class="section" id="q18">
+  <div class="section-header">
+    <div class="qnum">18</div>
+    <h2>CIDR – Classless Inter-Domain Routing</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>CIDR</strong> is a method for allocating IP addresses and routing that replaces the old Class A/B/C system. It uses a <strong>prefix length</strong> (slash notation) to define the network portion of an IP address.</div>
+    <h3>Notation</h3>
+    <pre>IP Address / Prefix-Length
+Example: 192.168.1.0/24</pre>
+    <p>The <code>/24</code> means the first 24 bits are the <strong>network part</strong>; remaining 8 bits are for hosts.</p>
+    <h3>Examples</h3>
+    <table>
+      <tr><th>CIDR</th><th>Subnet Mask</th><th>Hosts Available</th><th>Network Range</th></tr>
+      <tr><td>192.168.1.0/24</td><td>255.255.255.0</td><td>254</td><td>192.168.1.1 – .254</td></tr>
+      <tr><td>10.0.0.0/8</td><td>255.0.0.0</td><td>16,777,214</td><td>10.0.0.1 – 10.255.255.254</td></tr>
+      <tr><td>172.16.0.0/16</td><td>255.255.0.0</td><td>65,534</td><td>172.16.0.1 – 172.16.255.254</td></tr>
+      <tr><td>192.168.1.0/28</td><td>255.255.255.240</td><td>14</td><td>192.168.1.1 – .14</td></tr>
+      <tr><td>192.168.1.0/30</td><td>255.255.255.252</td><td>2</td><td>192.168.1.1 – .2 (P2P links)</td></tr>
+    </table>
+    <div class="note">Hosts = 2^(32-prefix) − 2 (subtract network address and broadcast address)</div>
+    <div class="tip">CIDR allows <strong>variable-length subnetting</strong>, reducing IP address waste compared to classful networking.</div>
+  </div>
+</div>
+
+<!-- ══ Q19 ══ -->
+<div class="section" id="q19">
+  <div class="section-header">
+    <div class="qnum">19</div>
+    <h2>Various Options of the umount Command</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>umount</strong> (unmount) detaches a mounted filesystem from the directory tree so the device can be safely removed.</div>
+    <pre>umount [OPTIONS] device/mountpoint</pre>
+    <table>
+      <tr><th>Option</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td><code>umount /mnt/usb</code></td><td>Unmount by mount point</td><td><code>umount /mnt/usb</code></td></tr>
+      <tr><td><code>umount /dev/sdb1</code></td><td>Unmount by device</td><td><code>umount /dev/sdb1</code></td></tr>
+      <tr><td><code>-f</code></td><td>Force unmount (even if busy)</td><td><code>umount -f /mnt/nfs</code></td></tr>
+      <tr><td><code>-l</code></td><td>Lazy unmount — detaches now, cleans up when not busy</td><td><code>umount -l /mnt/usb</code></td></tr>
+      <tr><td><code>-r</code></td><td>If unmount fails, remount read-only</td><td><code>umount -r /mnt/data</code></td></tr>
+      <tr><td><code>-v</code></td><td>Verbose output</td><td><code>umount -v /dev/sdb1</code></td></tr>
+      <tr><td><code>-a</code></td><td>Unmount all filesystems listed in /etc/mtab</td><td><code>umount -a</code></td></tr>
+      <tr><td><code>-t type</code></td><td>Unmount only filesystems of specified type</td><td><code>umount -t nfs</code></td></tr>
+    </table>
+    <div class="warn">If you get "device is busy" error, use <code>fuser -m /mnt/usb</code> to see which process is using it, then kill it before unmounting.</div>
+  </div>
+</div>
+
+<!-- ══ Q20 ══ -->
+<div class="section" id="q20">
+  <div class="section-header">
+    <div class="qnum">20</div>
+    <h2>The FSTAB File</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>/etc/fstab</strong> (File System TABle) is a configuration file that defines how disk partitions, NFS shares, and other filesystems are mounted automatically at boot.</div>
+    <h3>Format (6 fields per line)</h3>
+    <pre># Device         MountPoint    FSType   Options        Dump  Pass
+/dev/sda1        /             ext4     defaults        1     1
+/dev/sda2        /home         ext4     defaults        1     2
+/dev/sdb1        /mnt/data     xfs      defaults        0     0
+UUID=xxxx        swap          swap     sw              0     0
+server:/shared   /mnt/nfs      nfs      defaults        0     0
+tmpfs            /tmp          tmpfs    size=512M       0     0</pre>
+    <h3>Field Descriptions</h3>
+    <table>
+      <tr><th>Field</th><th>Values</th><th>Meaning</th></tr>
+      <tr><td>Device</td><td>/dev/sda1, UUID=, LABEL=</td><td>What to mount</td></tr>
+      <tr><td>Mount Point</td><td>/home, /mnt/usb</td><td>Where to mount</td></tr>
+      <tr><td>FS Type</td><td>ext4, xfs, nfs, tmpfs, swap</td><td>Filesystem type</td></tr>
+      <tr><td>Options</td><td>defaults, ro, rw, noexec, nosuid</td><td>Mount options</td></tr>
+      <tr><td>Dump</td><td>0 or 1</td><td>1 = backup with dump utility; 0 = skip</td></tr>
+      <tr><td>Pass</td><td>0, 1, or 2</td><td>fsck order: 1=root, 2=others, 0=skip check</td></tr>
+    </table>
+    <div class="tip">After editing fstab, test with: <code>mount -a</code> (mounts all without reboot). Use UUID instead of /dev/sdX for reliability.</div>
+  </div>
+</div>
+
+<!-- ══ Q21 ══ -->
+<div class="section" id="q21">
+  <div class="section-header">
+    <div class="qnum">21</div>
+    <h2>Process to Set Up a Network Interface Card (NIC)</h2>
+  </div>
+  <div class="section-body">
+    <div class="def">Setting up a NIC involves configuring an IP address, gateway, DNS, and activating the interface so the system can communicate on the network.</div>
+    <h3>Method 1: Temporary (using ip / ifconfig)</h3>
+    <pre># Assign IP address
+ip addr add 192.168.1.100/24 dev eth0
+
+# Bring interface up
+ip link set eth0 up
+
+# Add default gateway
+ip route add default via 192.168.1.1
+
+# Verify
+ip addr show eth0</pre>
+    <h3>Method 2: Permanent (using /etc/network/interfaces – Debian/Ubuntu)</h3>
+    <pre># Edit /etc/network/interfaces
+auto eth0
+iface eth0 inet static
+    address 192.168.1.100
+    netmask 255.255.255.0
+    gateway 192.168.1.1
+    dns-nameservers 8.8.8.8 8.8.4.4
+
+# Restart networking
+systemctl restart networking</pre>
+    <h3>Method 3: NetworkManager (nmcli – modern Linux)</h3>
+    <pre>nmcli con add type ethernet ifname eth0
+nmcli con mod eth0 ipv4.addresses 192.168.1.100/24
+nmcli con mod eth0 ipv4.gateway 192.168.1.1
+nmcli con mod eth0 ipv4.dns "8.8.8.8"
+nmcli con mod eth0 ipv4.method manual
+nmcli con up eth0</pre>
+    <h3>Verify Configuration</h3>
+    <pre>ip addr         # Show interfaces and IPs
+ip route        # Show routing table
+ping 8.8.8.8    # Test connectivity</pre>
+  </div>
+</div>
+
+<!-- ══ Q22 ══ -->
+<div class="section" id="q22">
+  <div class="section-header">
+    <div class="qnum">22</div>
+    <h2>Brief Notes on: Dual Kernel · Booting · FTP · Java Client · Multiprocessing · RPM</h2>
+  </div>
+  <div class="section-body">
+    <h3>Dual Kernel</h3>
+    <p>A system where <strong>two kernels</strong> coexist — typically a real-time kernel alongside the standard Linux kernel (e.g., PREEMPT-RT patch or Xenomai). Used in embedded systems and industrial applications where real-time guarantees are needed alongside general-purpose tasks.</p>
+
+    <h3>Booting</h3>
+    <p>The process of starting the computer and loading the OS. Linux boot sequence:</p>
+    <p><strong>Power ON → BIOS/UEFI (POST) → MBR/GPT → Bootloader (GRUB) → Kernel loaded → initramfs → init / systemd → Login prompt</strong></p>
+    <p>Key files: <code>/boot/vmlinuz</code> (kernel), <code>/boot/initrd.img</code> (initial RAM disk), <code>/etc/inittab</code> or systemd units.</p>
+
+    <h3>FTP (File Transfer Protocol)</h3>
+    <p>Network protocol for transferring files between client and server on port <strong>21</strong> (control) and port <strong>20</strong> (data). Commands: <code>get</code> (download), <code>put</code> (upload), <code>ls</code> (list). FTP is <strong>insecure</strong> (plain text); use <strong>SFTP or FTPS</strong> for encrypted transfers.</p>
+
+    <h3>Java Client</h3>
+    <p>A Java application that connects to a server (using sockets, HTTP, RMI, or JMS). On Linux, Java clients run on the JVM. Example: a Java app using <code>Socket</code> class to connect to a server, send/receive data. To run: <code>java -jar client.jar</code>. Java's WORA (Write Once Run Anywhere) makes it ideal for cross-platform Linux clients.</p>
+
+    <h3>Multiprocessing</h3>
+    <p>The ability to run processes on <strong>multiple CPU cores/processors simultaneously</strong> (true parallelism). Linux supports SMP (Symmetric Multi-Processing) — all CPUs share a single memory space and are managed by one OS instance. Different from multitasking (single CPU, time-sliced). Linux distributes processes across cores automatically. Tools: <code>nproc</code>, <code>lscpu</code>, <code>htop</code>.</p>
+
+    <h3>RPM (Red Hat Package Manager)</h3>
+    <p>Package management system used in Red Hat-based distros (RHEL, CentOS, Fedora). An RPM file contains a compiled application + metadata (name, version, dependencies).</p>
+    <pre>rpm -ivh package.rpm    # Install
+rpm -Uvh package.rpm    # Upgrade
+rpm -evh package        # Remove (erase)
+rpm -qa                 # List all installed packages
+rpm -qi package         # Query info about package</pre>
+  </div>
+</div>
+
+<!-- ══ Q23 ══ -->
+<div class="section" id="q23">
+  <div class="section-header">
+    <div class="qnum">23</div>
+    <h2>UID and SGID</h2>
+  </div>
+  <div class="section-body">
+    <h3>UID – User ID</h3>
+    <div class="def">A numeric identifier assigned to each user in Linux. Used by the kernel to track ownership and permissions.</div>
+    <ul>
+      <li><strong>Root UID = 0</strong> (superuser, full system access)</li>
+      <li>System users: UID 1–999 (daemons, services)</li>
+      <li>Regular users: UID 1000+ (created by admin)</li>
+      <li>View UIDs: <code>cat /etc/passwd</code> or <code>id username</code></li>
+      <li>The kernel uses UID (not username) for all permission checks</li>
+    </ul>
+    <h3>SGID – Set Group ID</h3>
+    <div class="def">A special permission bit. When set on a file/directory, it causes processes or new files to inherit the group owner, not the user's primary group.</div>
+    <h3>SGID on Files</h3>
+    <p>When SGID is set on an executable, the process runs with the <strong>file's group permissions</strong>, not the user's group. Useful for programs that need group-level access.</p>
+    <h3>SGID on Directories</h3>
+    <p>Files created inside the directory <strong>inherit the directory's group</strong>, not the creator's primary group. Ideal for shared team directories.</p>
+    <pre># Set SGID on directory
+chmod g+s /shared_dir
+# or
+chmod 2755 /shared_dir
+
+# View SGID: 's' appears in group execute position
+ls -l /shared_dir
+# Output: drwxr-sr-x  (s = SGID set)</pre>
+    <div class="tip">SUID (Set User ID) is similar but applies to user instead of group. Example: <code>/usr/bin/passwd</code> has SUID so regular users can change their password (which requires writing to /etc/shadow).</div>
+  </div>
+</div>
+
+<!-- ══ Q24 ══ -->
+<div class="section" id="q24">
+  <div class="section-header">
+    <div class="qnum">24</div>
+    <h2>Essential Files Required to Maintain Users in Linux</h2>
+  </div>
+  <div class="section-body">
+    <table>
+      <tr><th>File</th><th>Purpose</th><th>Sample Entry</th></tr>
+      <tr>
+        <td><strong>/etc/passwd</strong></td>
+        <td>Stores user account info. World-readable.</td>
+        <td><code>john:x:1001:1001:John:/home/john:/bin/bash</code></td>
+      </tr>
+      <tr>
+        <td><strong>/etc/shadow</strong></td>
+        <td>Stores hashed passwords and password policy. Root-readable only.</td>
+        <td><code>john:$6$hash:18900:0:99999:7:::</code></td>
+      </tr>
+      <tr>
+        <td><strong>/etc/group</strong></td>
+        <td>Group definitions — group name, GID, members.</td>
+        <td><code>developers:x:1002:john,alice</code></td>
+      </tr>
+      <tr>
+        <td><strong>/etc/gshadow</strong></td>
+        <td>Secure group info — group passwords, administrators.</td>
+        <td><code>developers:!::john,alice</code></td>
+      </tr>
+      <tr>
+        <td><strong>/etc/skel/</strong></td>
+        <td>Template directory — files here are copied to new user's home on creation.</td>
+        <td><code>.bashrc, .profile, .bash_logout</code></td>
+      </tr>
+      <tr>
+        <td><strong>/home/username/</strong></td>
+        <td>User's personal home directory for files, configs.</td>
+        <td><code>/home/john/</code></td>
+      </tr>
+      <tr>
+        <td><strong>/etc/login.defs</strong></td>
+        <td>Default settings for useradd — UID range, password aging, home dir.</td>
+        <td><code>UID_MIN 1000 | PASS_MAX_DAYS 99999</code></td>
+      </tr>
+    </table>
+    <h3>Fields in /etc/passwd</h3>
+    <pre>username : password(x) : UID : GID : GECOS : home_dir : shell
+john     : x          : 1001: 1001: John  : /home/john: /bin/bash</pre>
+    <p>The <code>x</code> in password field means the actual password is stored in <code>/etc/shadow</code>.</p>
+  </div>
+</div>
+
+<!-- ══ Q25 ══ -->
+<div class="section" id="q25">
+  <div class="section-header">
+    <div class="qnum">25</div>
+    <h2>What is the Shell in Linux?</h2>
+  </div>
+  <div class="section-body">
+    <div class="def"><strong>Shell</strong> is a special user program (command interpreter) that provides an interface between the user and the Linux kernel. It accepts commands from the user (or scripts), interprets them, and causes the kernel to execute the requested operations.</div>
+    <h3>Role of Shell</h3>
+    <ul>
+      <li>Sits between the user and kernel, acting as a <strong>mediator</strong></li>
+      <li>Reads input from keyboard/script; sends instructions to kernel via <strong>system calls</strong></li>
+      <li>Displays output back to the user (terminal/screen)</li>
+      <li>Provides a <strong>scripting language</strong> for automation</li>
+    </ul>
+    <div class="diagram-wrap">
+      <svg width="680" height="120" viewBox="0 0 680 120" role="img">
+        <title>Shell position diagram</title>
+        <desc>User communicates with Shell which communicates with Kernel which communicates with Hardware.</desc>
+        <defs><marker id="arr4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#374151" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+        <rect x="40"  y="30" width="120" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="100" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#1e40af">User</text>
+        <rect x="230" y="30" width="120" height="50" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+        <text x="290" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Shell</text>
+        <rect x="420" y="30" width="120" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="480" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Kernel</text>
+        <rect x="600" y="30" width="60" height="50" rx="8" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+        <text x="630" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">HW</text>
+        <line x1="162" y1="55" x2="228" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#arr4)"/>
+        <line x1="352" y1="55" x2="418" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#arr4)"/>
+        <line x1="542" y1="55" x2="598" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#arr4)"/>
+        <text x="195" y="48" text-anchor="middle" font-size="10" fill="#6b7280">commands</text>
+        <text x="385" y="48" text-anchor="middle" font-size="10" fill="#6b7280">sys calls</text>
+      </svg>
+    </div>
+    <h3>Types of Shell</h3>
+    <ul>
+      <li><strong>Interactive Shell:</strong> Takes commands directly from user (terminal). e.g., login shell after SSH.</li>
+      <li><strong>Non-interactive Shell:</strong> Runs scripts without user input. e.g., cron jobs, startup scripts.</li>
+      <li><strong>Login Shell:</strong> Started at login; reads <code>/etc/profile</code>, <code>~/.bash_profile</code>.</li>
+      <li><strong>Non-login Shell:</strong> Opened in existing session; reads <code>~/.bashrc</code>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ Q26 ══ -->
+<div class="section" id="q26">
+  <div class="section-header">
+    <div class="qnum">26</div>
+    <h2>Compare the Difference in Shell Working in Linux</h2>
+  </div>
+  <div class="section-body">
+    <table>
+      <tr><th>Feature</th><th>sh (Bourne)</th><th>bash</th><th>ksh</th><th>csh/tcsh</th><th>zsh</th></tr>
+      <tr><td>Default in</td><td>Old Unix</td><td>Ubuntu, Debian, RHEL</td><td>AIX, HP-UX</td><td>BSD Unix</td><td>macOS, Kali</td></tr>
+      <tr><td>Arrays</td><td>No</td><td>Yes (1D)</td><td>Yes (Assoc.)</td><td>Limited</td><td>Yes (full)</td></tr>
+      <tr><td>Arithmetic</td><td>expr only</td><td>$(( ))</td><td>$(( ))</td><td>@ operator</td><td>$(( ))</td></tr>
+      <tr><td>History</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes (powerful)</td></tr>
+      <tr><td>Auto-complete</td><td>No</td><td>Basic</td><td>Basic</td><td>Basic</td><td>Advanced</td></tr>
+      <tr><td>Functions</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Limited</td><td>Yes</td></tr>
+      <tr><td>Script syntax</td><td>Basic</td><td>sh-compatible</td><td>sh-compatible</td><td>C-like</td><td>sh-compatible</td></tr>
+      <tr><td>Scripting power</td><td>Low</td><td>High</td><td>High</td><td>Medium</td><td>Very High</td></tr>
+      <tr><td>Interactive use</td><td>Minimal</td><td>Good</td><td>Good</td><td>Good</td><td>Excellent</td></tr>
+      <tr><td>Plugins/themes</td><td>No</td><td>Oh-my-bash</td><td>No</td><td>No</td><td>Oh-my-zsh</td></tr>
+    </table>
+    <h3>How Each Shell Processes a Command</h3>
+    <ol>
+      <li><strong>Tokenization:</strong> Shell splits command line into tokens (command, arguments, operators).</li>
+      <li><strong>Expansion:</strong> Variables (<code>$VAR</code>), wildcards (<code>*</code>), command substitution (<code>$(cmd)</code>) are expanded.</li>
+      <li><strong>Parsing:</strong> Shell determines if it's a built-in command (handled internally) or external program.</li>
+      <li><strong>Execution:</strong> For external commands, shell calls <code>fork()</code> then <code>exec()</code> to run the program.</li>
+      <li><strong>I/O Redirection:</strong> Shell sets up pipes/redirections before handing control to the process.</li>
+      <li><strong>Wait:</strong> Shell waits (for foreground) or continues (for background <code>&amp;</code>) for the process to complete.</li>
+    </ol>
+    <div class="tip">For exam: <strong>Bash is the most important shell to know</strong>. It is the default in most Linux distributions and the most commonly used for scripting.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center; margin-top: 32px; padding: 20px; color: #6c757d; font-size: 12px; border-top: 1px solid #dee2e6;">
+  Linux Exam Guide · All 26 Questions Covered · Good Luck! 🐧
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
